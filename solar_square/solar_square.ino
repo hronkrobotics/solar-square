@@ -37,7 +37,6 @@ bool buttonDown = false;
 bool longPressFired = false;
 uint32_t pressedAt = 0;
 uint32_t lastEdge = 0;
-uint32_t flashUntil = 0;
 
 void setMode(uint8_t m) {
   mode = m % MODE_COUNT;
@@ -64,21 +63,12 @@ void pollButton(uint32_t now) {
       longPressFired = false;
     } else if (!longPressFired) {
       setMode(mode + 1);
-      flashUntil = now + 120;
     }
   }
 
   if (buttonDown && !longPressFired && now - pressedAt >= LONG_PRESS_MS) {
     longPressFired = true;
     setBrightnessLevel(brightnessLevel + 1);
-  }
-}
-
-void updateButtonLed(uint32_t now) {
-  if (buttonDown || now < flashUntil) {
-    analogWrite(PIN_BUTTON_LED, 255);
-  } else {
-    analogWrite(PIN_BUTTON_LED, beatsin8(12, 6, 80));
   }
 }
 
@@ -93,7 +83,6 @@ void setup() {
   Serial.begin(115200);
 
   pinMode(PIN_BUTTON, INPUT_PULLUP);
-  pinMode(PIN_BUTTON_LED, OUTPUT);
 
   FastLED.addLeds<WS2812B, PIN_MATRIX, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setMaxPowerInVoltsAndMilliamps(5, MAX_MILLIAMPS);
@@ -109,7 +98,6 @@ void setup() {
 void loop() {
   uint32_t now = millis();
   pollButton(now);
-  updateButtonLed(now);
   saveSettingsIfDue(now);
 
   if (now - lastFrame >= FRAME_MS) {

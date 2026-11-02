@@ -5,7 +5,6 @@
 // left alone. GPIO3 and GPIO6/7 are kept free for a future accelerometer.
 constexpr uint8_t PIN_MATRIX = 10;     // WS2812B DIN, through a 330 ohm resistor
 constexpr uint8_t PIN_BUTTON = 1;      // momentary button to GND
-constexpr uint8_t PIN_BUTTON_LED = 20; // LED inside the momentary button
 
 constexpr uint8_t MATRIX_W = 8;
 constexpr uint8_t MATRIX_H = 8;

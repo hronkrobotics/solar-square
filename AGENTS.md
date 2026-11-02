@@ -16,7 +16,7 @@ Solar Square is the follow-up to [Solar Eyes](https://github.com/hronkrobotics/s
 
 ## Hardware decisions
 
-- Pins: matrix DIN on GPIO10, momentary button on GPIO1, button LED on GPIO20.
+- Pins: matrix DIN on GPIO10, momentary button on GPIO1. The button's built-in LED is not wired.
 - Kept free on purpose: GPIO3 (accelerometer interrupt, deep-sleep wake capable) and GPIO6/7 (I2C).
 - Avoid GPIO2, 8, 9 (strapping) and GPIO21 (bootloader output).
 - LED current is capped at 450 mA because the 5 V converter is rated for 600 mA.

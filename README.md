@@ -33,9 +33,6 @@ The last pattern and brightness are saved, so it comes back the same way after b
 | Latching button | Power on and off |
 | Momentary button, short press | Next pattern |
 | Momentary button, hold for 0.7 s | Next brightness level (four levels, then back to the lowest) |
-
-The LED inside the momentary button breathes slowly while the matrix is on and lights up fully while the button is held.
-
 ## Hardware
 
 | Part | Notes |
@@ -47,13 +44,13 @@ The LED inside the momentary button breathes slowly while the matrix is on and l
 | 5 V buck/boost converter | Same CANADUINO module as Solar Eyes, 5 V at up to 600 mA, EN pin |
 | 70 x 70 mm solar panel | Check the label: the CN3065 needs a 5-6 V panel |
 | Latching push button | Main power switch |
-| Momentary push button with built-in LED | Pattern and brightness control |
+| Momentary push button | Pattern and brightness control |
 | 330 ohm resistor | In series with the matrix data line |
 | 470 uF capacitor, 6.3 V or higher | Across the matrix's 5 V and GND |
 
 ## System Overview
 
-The solar panel feeds the CN3065, which charges the 1500 mAh LiPo. The charger's SYS output follows the cell voltage, about 3.0 V to 4.2 V, and the buck/boost converter turns it into a steady 5 V. The latching button switches that 5 V rail, which powers both the SuperMini and the matrix. The SuperMini drives the matrix from one GPIO, reads the momentary button on another, and dims the button's LED with PWM on a third.
+The solar panel feeds the CN3065, which charges the 1500 mAh LiPo. The charger's SYS output follows the cell voltage, about 3.0 V to 4.2 V, and the buck/boost converter turns it into a steady 5 V. The latching button switches that 5 V rail, which powers both the SuperMini and the matrix. The SuperMini drives the matrix from one GPIO and reads the momentary button on another.
 
 ```mermaid
 flowchart LR
@@ -65,7 +62,6 @@ flowchart LR
     SW -->|"5 V"| MATRIX["8x8 WS2812B matrix"]
     MCU -->|"GPIO10, through 330 ohm"| MATRIX
     BTN["Momentary button"] -->|"GPIO1"| MCU
-    MCU -->|"GPIO20"| BTNLED["Button LED"]
 ```
 
 ## Wiring
@@ -82,9 +78,6 @@ flowchart LR
 | SuperMini GPIO10 | 330 ohm resistor, then matrix DIN | Put the resistor close to the matrix. |
 | 470 uF capacitor | Matrix 5 V and GND | Watch the polarity. Smooths the current spikes when LEDs switch on. |
 | SuperMini GPIO1 | Momentary button, other leg to GND | Uses the ESP32's internal pull-up |
-| SuperMini GPIO20 | Button LED + | See below for the resistor. Button LED - goes to GND. |
-
-**The button's LED.** Check the voltage printed on the button or its listing. A 3 V LED needs a 100 to 220 ohm resistor in series. A 5 V or 6 V LED already has a resistor built in, so wire it straight to GPIO20; it will be a little dimmer at 3.3 V. A 12 V LED will barely light from a GPIO pin.
 
 **The latching button's rating.** At full brightness the 5 V rail can draw about 500 mA. Use a button rated for at least 1 A. If yours is a small one rated lower, switch the converter's EN pin with it instead (EN to VIN through the button), which carries almost no current. In that setup the converter stays connected to the 5 V rail while off, so USB-C power can reach its output; unplug the battery before reflashing until that has been checked.
 
