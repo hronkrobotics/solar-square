@@ -100,10 +100,13 @@ void loop() {
   pollButton(now);
   saveSettingsIfDue(now);
 
-  if (now - lastFrame >= FRAME_MS) {
-    lastFrame = now;
-    MODES[mode].draw(now, !modeStarted);
-    modeStarted = true;
-    FastLED.show();
+  if (now - lastFrame < FRAME_MS) {
+    // The C3 is single-core. A tight spin here starves USB and the port drops.
+    delay(2);
+    return;
   }
+  lastFrame = now;
+  MODES[mode].draw(now, !modeStarted);
+  modeStarted = true;
+  FastLED.show();
 }
