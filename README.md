@@ -80,7 +80,7 @@ Prices are Amazon.ca listing prices in CAD, checked between October 26 and Novem
 
 **Total for the linked parts:** C$154.98, plus the battery.
 
-Also needed, from parts on hand: four small screws for the matrix retaining bracket, 22-24 AWG hookup wire, double-sided tape, and 3D printer filament. A 330 ohm resistor and a 470 uF capacitor are recommended for the matrix (see [Wiring](#wiring)).
+Also needed, from parts on hand: four self-tapping screws for the matrix retaining bracket (2.5 mm was used here, but anything from 2 to 3 mm bites into the plastic fine), 22-24 AWG hookup wire, double-sided tape, and 3D printer filament. A 330 ohm resistor and a 470 uF capacitor are recommended for the matrix (see [Wiring](#wiring)).
 
 ## Required Tools
 
@@ -179,7 +179,7 @@ Set the ESP32-C3 SuperMini and the CN3065 charger on the board so that, once the
 
 ### 4. Mount the matrix
 
-Put the matrix into the case, LEDs facing out. Then fit the retaining bracket behind it and secure it with four screws from the outside of the case. The build videos on [Instagram](https://www.instagram.com/hronk7/) show this step.
+Put the matrix into the case, LEDs facing out. Then fit the retaining bracket behind it and secure it with four 2 to 3 mm self-tapping screws from the outside of the case. The build videos on [Instagram](https://www.instagram.com/hronk7/) show this step.
 
 ### 5. Wire the perfboard
 
