@@ -18,13 +18,22 @@ constexpr bool MATRIX_FLIP_X = false;
 constexpr bool MATRIX_FLIP_Y = false;
 constexpr bool MATRIX_TRANSPOSE = false;
 
-// The 5 V converter is rated for 600 mA, and the SuperMini needs some of that.
-// FastLED dims the whole frame whenever a frame would draw more than this.
-constexpr uint32_t MAX_MILLIAMPS = 450;
+// The 5 V converter is rated for 600 mA, and the SuperMini's Wi-Fi radio can pull
+// about 200 mA of that while transmitting. FastLED dims the whole frame whenever a
+// frame would draw more than this.
+constexpr uint32_t MAX_MILLIAMPS = 350;
 
 // A long press steps through these. WS2812Bs are very bright up close.
 constexpr uint8_t BRIGHTNESS_LEVELS[] = {8, 24, 64, 128};
 constexpr uint8_t BRIGHTNESS_COUNT = sizeof(BRIGHTNESS_LEVELS) / sizeof(BRIGHTNESS_LEVELS[0]);
+constexpr uint8_t DEFAULT_BRIGHTNESS = 24;
+
+// The board hosts its own Wi-Fi network. The last four characters of the name come
+// from the chip, so two boards in the same room get different names. The password
+// must be at least 8 characters. Turning Wi-Fi off saves a lot of battery.
+constexpr bool WIFI_ENABLED = true;
+constexpr const char* WIFI_NAME_PREFIX = "SolarSquare";
+constexpr const char* WIFI_PASSWORD = "solarsquare";
 
 constexpr uint16_t FRAME_MS = 16;
 constexpr uint16_t DEBOUNCE_MS = 25;

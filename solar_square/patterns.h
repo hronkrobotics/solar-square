@@ -182,3 +182,35 @@ void patternLife(uint32_t now, bool start) {
     }
   }
 }
+
+// Pixels painted on the web page, row by row from the top left.
+static CRGB canvas[NUM_LEDS];
+
+void patternDrawing(uint32_t, bool) {
+  for (uint8_t y = 0; y < MATRIX_H; y++) {
+    for (uint8_t x = 0; x < MATRIX_W; x++) {
+      leds[XY(x, y)] = canvas[y * MATRIX_W + x];
+    }
+  }
+}
+
+struct Mode {
+  const char* name;
+  PatternFn draw;
+};
+
+// The button steps through these in order. The web page lists them the same way.
+const Mode MODES[] = {
+  {"smiley", patternSmiley},
+  {"heart", patternHeart},
+  {"invader", patternInvader},
+  {"rainbow", patternRainbow},
+  {"plasma", patternPlasma},
+  {"fire", patternFire},
+  {"rain", patternRain},
+  {"confetti", patternConfetti},
+  {"life", patternLife},
+  {"drawing", patternDrawing},
+};
+const uint8_t MODE_COUNT = sizeof(MODES) / sizeof(MODES[0]);
+const uint8_t DRAWING_MODE = MODE_COUNT - 1;
