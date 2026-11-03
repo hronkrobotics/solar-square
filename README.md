@@ -1,5 +1,13 @@
 # solar-square
 
+<table>
+  <tr>
+    <td><img src="images/solar-square-front.jpg" width="280" height="280" alt="Solar Square on a mat, orange smiley on the matrix"></td>
+    <td><img src="images/solar-square-side.jpg" width="280" height="280" alt="Side view with the two buttons and USB-C cutout"></td>
+    <td><img src="images/solar-square-back.jpg" width="280" height="280" alt="Back of the case with the 70 x 70 mm solar panel"></td>
+  </tr>
+</table>
+
 Solar Square is a solar-charged 8x8 RGB LED matrix in a 3D-printed case. It plays pixel art and animated patterns, and it hosts its own Wi-Fi network with a control page, so you can change patterns, set the brightness, and draw on it from your phone. No app, account, or internet connection is needed.
 
 It is the second project in the [Solar Eyes](https://github.com/hronkrobotics/solareyes) line. Most of the electrical system is reused from Solar Eyes: the same ESP32-C3 SuperMini, CN3065 solar charger, and 5 V buck/boost converter. The OLED is swapped for 64 WS2812B LEDs, the battery is much bigger, and a 70 x 70 mm solar panel sits on the back.
@@ -329,7 +337,6 @@ Version 0.1 is a proof of concept, and it has known rough edges. Future versions
 - Battery-level reading on an ADC pin, shown on the matrix
 - Deep sleep with wake on the button
 - More pixel art and patterns
-- Build photos in this README
 
 ## References
 
